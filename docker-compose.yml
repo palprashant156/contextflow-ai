@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: ankane/pgvector:v0.5.1
+    container_name: cortexflow_postgres
+    environment:
+      POSTGRES_USER: cortexflow
+      POSTGRES_PASSWORD: cortexflow_password
+      POSTGRES_DB: cortexflow_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: cortexflow_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.10.2
+    container_name: cortexflow_mlflow
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow.db
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/mlruns
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+    volumes:
+      - mlflow_data:/mlruns
+      - mlflow_db:/mlflow
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  mlflow_data:
+  mlflow_db:
