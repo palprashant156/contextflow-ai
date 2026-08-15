@@ -8,7 +8,7 @@ from app.services.sql_agent.sql_validator import validate_sql_query
 from app.services.sql_agent.sql_execution import execute_safe_sql
 from app.services.ml.classification_service import predict_document_category
 
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 
 def run_complex_workflow(db: Session, query: str, user_id: str) -> dict:
@@ -37,7 +37,7 @@ def run_complex_workflow(db: Session, query: str, user_id: str) -> dict:
     
     # Step 3: Synthesis
     analysis_steps.append("3. Correlating data metrics with enterprise policies.")
-    llm = ChatOpenAI(model="gpt-4-turbo-preview", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-pro-latest", temperature=0)
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are CortexFlow AI. Answer the complex business query using the provided Data Metrics and Policy Context."),
         ("user", "Query: {query}\n\nData Metrics:\n{sql_results}\n\nPolicy Context:\n{rag_context}")

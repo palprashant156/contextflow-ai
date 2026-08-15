@@ -1,5 +1,7 @@
-from celery import Celery
 import os
+from dotenv import load_dotenv
+load_dotenv(override=True)
+from celery import Celery
 from app.core.config import settings
 
 # Initialize Celery app with Redis broker

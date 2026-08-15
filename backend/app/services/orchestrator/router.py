@@ -1,5 +1,5 @@
 from enum import Enum
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -14,7 +14,7 @@ def classify_intent(user_query: str) -> QueryIntent:
     """
     Uses an LLM to classify the user's intent to route to the correct tool.
     """
-    llm = ChatOpenAI(model="gpt-4-turbo-preview", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-flash-latest", temperature=0)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are the AI Orchestrator for CortexFlow.

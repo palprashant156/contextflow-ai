@@ -1,18 +1,18 @@
 import os
 from typing import List
-from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-# Note: In a real environment, you would instantiate this with your OpenAI API key
-# passed via environment variables (e.g., OPENAI_API_KEY).
+# Note: In a real environment, you would instantiate this with your Gemini API key
+# passed via environment variables (e.g., GEMINI_API_KEY).
 # For local dev without a key, you could swap this for HuggingFaceEmbeddings.
 
 def get_embeddings_model():
     """
     Returns the configured embeddings model.
-    Using text-embedding-ada-002 as standard for 1536 dimensions.
+    Using models/embedding-001 as standard for 768 dimensions.
     """
-    # Assuming OPENAI_API_KEY is in the environment
-    return OpenAIEmbeddings(model="text-embedding-ada-002")
+    # Assuming GEMINI_API_KEY is in the environment
+    return GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 def generate_embeddings(texts: List[str]) -> List[List[float]]:
     """

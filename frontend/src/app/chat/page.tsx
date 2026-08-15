@@ -48,7 +48,14 @@ export default function ChatPage() {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to get response");
+        let errorText = "Failed to get response";
+        try {
+          const errData = await res.json();
+          errorText = errData.detail || errorText;
+        } catch {
+          errorText = await res.text();
+        }
+        throw new Error(errorText);
       }
 
       const data = await res.json();
@@ -61,12 +68,12 @@ export default function ChatPage() {
       };
       
       setMessages(prev => [...prev, aiMsg]);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       const errorMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "ai",
-        content: "Sorry, I encountered an error while processing your request.",
+        content: `Error: ${err.message || "I encountered an error while processing your request."}`,
       };
       setMessages(prev => [...prev, errorMsg]);
     } finally {

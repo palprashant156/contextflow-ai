@@ -1,4 +1,4 @@
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -6,7 +6,7 @@ def generate_sql_from_nl(natural_language_query: str) -> str:
     """
     Uses an LLM to convert a Natural Language query into a Postgres SQL query.
     """
-    llm = ChatOpenAI(model="gpt-4-turbo-preview", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-pro-latest", temperature=0)
     
     # We provide a data dictionary/schema to the LLM
     schema_context = """
@@ -50,7 +50,7 @@ def synthesize_sql_answer(natural_language_query: str, sql_results: list) -> str
     """
     Takes the JSON result from the SQL query and asks the LLM to formulate a human-readable answer.
     """
-    llm = ChatOpenAI(model="gpt-4-turbo-preview", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-pro-latest", temperature=0)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are CortexFlow AI, a helpful business analyst.

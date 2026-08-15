@@ -3,7 +3,8 @@ from sqlalchemy import text
 from typing import List, Dict, Any
 from app.models.chunk import DocumentChunk
 from app.services.rag.embedding_service import generate_query_embedding
-from langchain_openai import ChatOpenAI
+from app.core.database import SessionLocal
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 
 def retrieve_similar_chunks(db: Session, query: str, user_id: str, top_k: int = 5) -> List[DocumentChunk]:
@@ -36,7 +37,7 @@ def generate_rag_answer(query: str, chunks: List[Any]) -> Dict[str, Any]:
     """
     Takes retrieved chunks, constructs a context window, and asks the LLM to generate an answer.
     """
-    llm = ChatOpenAI(model="gpt-4-turbo-preview", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-pro-latest", temperature=0)
     
     context_text = "\n\n".join([f"Source ID: {chunk.document_id}\nContent: {chunk.content}" for chunk in chunks])
     

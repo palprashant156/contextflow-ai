@@ -1,5 +1,6 @@
 from app.worker.celery_app import celery_app
 from app.core.database import SessionLocal
+from app.models.user import User
 from app.models.document import Document, DocumentStatus
 from app.models.chunk import DocumentChunk
 from app.services.rag.pdf_service import extract_text_from_pdf

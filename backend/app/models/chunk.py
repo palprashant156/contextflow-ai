@@ -11,7 +11,7 @@ class DocumentChunk(Base):
     document_id = Column(UUID(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
     content = Column(String, nullable=False)
     
-    # Using 1536 dimensions for OpenAI's text-embedding-ada-002 model
-    embedding = Column(Vector(1536), nullable=False) 
+    # Using 3072 dimensions for Google's models/gemini-embedding-001
+    embedding = Column(Vector(3072), nullable=False) 
     
     chunk_metadata = Column(JSONB, nullable=True)
