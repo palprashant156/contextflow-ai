@@ -59,8 +59,8 @@ export default function LoginPage() {
         setIsLogin(true);
         setError("Registration successful! Please login.");
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }

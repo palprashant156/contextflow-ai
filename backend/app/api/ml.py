@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from sqlalchemy.orm import Session
 from app.core.dependencies import get_current_user
 from app.models.user import User
 from app.services.ml.classification_service import predict_document_category

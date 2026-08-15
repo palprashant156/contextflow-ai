@@ -16,10 +16,6 @@ export default function DocumentsPage() {
   const [uploading, setUploading] = useState(false);
   const [documents, setDocuments] = useState<Document[]>([]);
 
-  useEffect(() => {
-    fetchDocuments();
-  }, []);
-
   const fetchDocuments = async () => {
     try {
       const res = await apiFetch("/documents/");
@@ -31,6 +27,10 @@ export default function DocumentsPage() {
       console.error("Failed to fetch documents", err);
     }
   };
+
+  useEffect(() => {
+    fetchDocuments();
+  }, []);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();

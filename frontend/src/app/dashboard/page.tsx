@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import DashboardLayout from "./layout";
+import { apiFetch } from "../../lib/api";
 
 type Analytics = {
   total_documents: number;
@@ -24,13 +25,13 @@ export default function DashboardPage() {
   useEffect(() => {
     // Fetch analytics using the new authenticated apiFetch
     apiFetch("/analytics/dashboard")
-      .then(res => res.json())
-      .then(data => {
+      .then((res: any) => res.json())
+      .then((data: any) => {
         if(data && typeof data.total_documents !== 'undefined') {
           setMetrics(data);
         }
       })
-      .catch(err => console.error("Failed to load analytics", err));
+      .catch((err: any) => console.error("Failed to load analytics", err));
   }, []);
 
   return (

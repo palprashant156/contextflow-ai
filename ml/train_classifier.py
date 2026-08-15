@@ -4,9 +4,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score
 import pandas as pd
-import os
 
 # Set MLflow tracking URI (assuming it runs via Docker on localhost:5000)
 mlflow.set_tracking_uri("http://localhost:5000")
