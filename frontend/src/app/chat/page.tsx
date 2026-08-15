@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import DashboardLayout from "../dashboard/layout";
+import DashboardLayout from "../dashboard/DashboardLayout";
 
 type Message = {
   id: string;

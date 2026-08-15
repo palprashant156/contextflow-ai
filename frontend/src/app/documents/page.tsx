@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import DashboardLayout from "../dashboard/layout";
+import DashboardLayout from "../dashboard/DashboardLayout";
 import { apiFetch } from "../../lib/api";
 
 type Document = {

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import DashboardLayout from "./layout";
+import DashboardLayout from "./DashboardLayout";
 import { apiFetch } from "../../lib/api";
 
 type Analytics = {

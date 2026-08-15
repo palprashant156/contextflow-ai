@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import DashboardLayout from "../dashboard/layout";
+import DashboardLayout from "../dashboard/DashboardLayout";
 import { apiFetch } from "../../lib/api";
 
 export default function MLModelsPage() {
